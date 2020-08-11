@@ -55,7 +55,7 @@ def parseAPI(connObj, datasetType):
         result_collection = []
 
         issuetime = data_seq.find("datasetinfo").find("issuetime")
-        county = data_seq.find("locations").find_all("locationsname")
+        county = data_seq.find("locations").find("locationsname")
         datatime = data_seq.find("weatherelement").find_all("datatime")
         city = data_seq.find("locations").find_all("locationname")
         geocode = data_seq.find("locations").find_all("geocode")
@@ -66,10 +66,6 @@ def parseAPI(connObj, datasetType):
         # 取得現在資料中所有單一時間並加入list
         for datatime_element in datatime:
             datatime_list.append(datatime_element.text)
-
-        # 取得現在資料中所有的縣市並加入list
-        for locations_element in county:
-            locations_list.append(locations_element.text)
 
         # 取得現在資料中所有的鄉鎮並加入list
         for location_element in city:
@@ -123,7 +119,7 @@ def parseAPI(connObj, datasetType):
                 elif datasetType == 2:
                     result_list.append(location_list[data_num])
                 else:
-                    result_list.append(locations_list[data_num])
+                    result_list.append(county.text)
                 result_list.append(location_list[data_num]) # city
                 result_list.append(lati_list[data_num]) # lati
                 result_list.append(longi_list[data_num]) # longi
